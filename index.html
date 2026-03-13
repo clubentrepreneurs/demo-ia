@@ -1,24 +1,19 @@
-<html>
-  <head>
-    <title>Démo Chatbot UniCA</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Assistant Étudiant UniCA</title>
     <style>
-      body { font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f0f2f5; }
-      .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; max-width: 400px; }
-      .button { background: #003576; color: white; padding: 15px 25px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold; margin-top: 20px; }
-      h1 { color: #003576; font-size: 24px; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: sans-serif; }
+        header { background: #003576; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        iframe { width: 100%; height: calc(100% - 50px); border: none; }
     </style>
-  </head>
-  <body>
-    <div class="card">
-      <h1>Chatbot UniCA</h1>
-      <p>Cliquez sur le bouton ci-dessous pour lancer l'interface de démonstration.</p>
-      
-      <a href="https://frieda-isthmian-darci.ngrok-free.dev/e/b3808c01-a6fb-4e48-ad7d-b471a934eb86" class="button">Lancer le Chat</a>
-      
-      <p style="font-size: 12px; color: #666; margin-top: 20px;">
-        Note : Si un message Ngrok apparaît, cliquez sur "Visit Site".
-      </p>
-    </div>
-  </body>
+</head>
+<body>
+    <header>
+        <strong>Portail Étudiant - Université Côte d'Azur</strong>
+        <span>Assistant IA Souverain</span>
+    </header>
+    <iframe src="https://frieda-isthmian-darci.ngrok-free.dev/workspace/chatbotunica"></iframe>
+</body>
 </html>
