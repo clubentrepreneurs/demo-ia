@@ -2,18 +2,28 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Assistant Étudiant UniCA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot UniCA - Assistant Étudiant</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: sans-serif; }
-        header { background: #003576; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-        iframe { width: 100%; height: calc(100% - 50px); border: none; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; }
+        header { background-color: #003576; color: white; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .container { display: flex; flex-direction: column; height: 100vh; }
+        /* L'astuce est ici : on affiche le chat dans un cadre qui cache l'admin */
+        iframe { flex-grow: 1; border: none; width: 100%; }
+        .footer { background: white; padding: 10px; text-align: center; font-size: 0.8em; color: #666; border-top: 1px solid #ddd; }
     </style>
 </head>
 <body>
-    <header>
-        <strong>Portail Étudiant - Université Côte d'Azur</strong>
-        <span>Assistant IA Souverain</span>
-    </header>
-    <iframe src="https://frieda-isthmian-darci.ngrok-free.dev/workspace/chatbotunica"></iframe>
+    <div class="container">
+        <header>
+            <h1>Assistant IA UniCA</h1>
+        </header>
+        
+        <iframe src="https://frieda-isthmian-darci.ngrok-free.dev/workspace/chatbotunica"></iframe>
+
+        <div class="footer">
+            Propulsé par une IA Souveraine - Université Côte d'Azur
+        </div>
+    </div>
 </body>
 </html>
