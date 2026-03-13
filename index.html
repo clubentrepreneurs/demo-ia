@@ -2,28 +2,56 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot UniCA - Assistant Étudiant</title>
+    <title>Assistant UniCA</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f9; }
-        header { background-color: #003576; color: white; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .container { display: flex; flex-direction: column; height: 100vh; }
-        /* L'astuce est ici : on affiche le chat dans un cadre qui cache l'admin */
-        iframe { flex-grow: 1; border: none; width: 100%; }
-        .footer { background: white; padding: 10px; text-align: center; font-size: 0.8em; color: #666; border-top: 1px solid #ddd; }
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; flex-direction: column; height: 100vh; margin: 0; }
+        #header { background: #003576; color: white; padding: 20px; text-align: center; font-weight: bold; }
+        #chat-box { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 10px; border-radius: 10px; max-width: 80%; }
+        .user { align-self: flex-end; background: #003576; color: white; }
+        .ai { align-self: flex-start; background: white; border: 1px solid #ddd; }
+        #input-area { padding: 20px; background: white; display: flex; gap: 10px; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #003576; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Assistant IA UniCA</h1>
-        </header>
-        
-        <iframe src="https://frieda-isthmian-darci.ngrok-free.dev/workspace/chatbotunica"></iframe>
-
-        <div class="footer">
-            Propulsé par une IA Souveraine - Université Côte d'Azur
-        </div>
+    <div id="header">Assistant Étudiant - Université Côte d'Azur</div>
+    <div id="chat-box" id="chatBox">
+        <div class="msg ai">Bonjour ! Posez-moi vos questions sur l'Université.</div>
     </div>
+    <div id="input-area">
+        <input type="text" id="userInput" placeholder="Votre question...">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const chatBox = document.getElementById('chat-box');
+            if (!input.value) return;
+
+            // Afficher le message utilisateur
+            chatBox.innerHTML += `<div class="msg user">${input.value}</div>`;
+            const userText = input.value;
+            input.value = '';
+
+            try {
+                const response = await fetch('https://frieda-isthmian-darci.ngrok-free.dev/workspace/chatbotunica/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer W4JJ4SX-P2YMHRH-G0FSH6M-HN2FAJY',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: userText, mode: 'chat' })
+                });
+                const data = await response.json();
+                chatBox.innerHTML += `<div class="msg ai">${data.textResponse}</div>`;
+            } catch (e) {
+                chatBox.innerHTML += `<div class="msg ai">Erreur de connexion au serveur.</div>`;
+            }
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
 </body>
 </html>
