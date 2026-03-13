@@ -25,7 +25,7 @@
         <button onclick="sendMessage()">Envoyer</button>
     </div>
 
-    <script>
+  <script>
     async function sendMessage() {
         const input = document.getElementById('userInput');
         const chatBox = document.getElementById('chat-box');
@@ -42,18 +42,27 @@
                     'Authorization': 'Bearer W4JJ4SX-P2YMHRH-G0FSH6M-HN2FAJY',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ message: userText, mode: 'chat' })
+                body: JSON.stringify({ message: userText, mode: 'query' }) // On force le mode query
             });
             
             const data = await response.json();
+            console.log("Réponse complète du serveur:", data);
+
+            // ANALYSE DE LA RÉPONSE
+            let aiReply = "";
             
-            // On cherche la réponse texte dans data.textResponse ou data.content
-            const aiReply = data.textResponse || data.content || "Je n'ai pas pu générer de réponse.";
+            if (data.textResponse) {
+                aiReply = data.textResponse; // Réponse normale
+            } else if (data.error) {
+                aiReply = "ERREUR SERVEUR : " + data.error; // Message d'erreur officiel
+            } else {
+                aiReply = "DEBUG (Contenu brut) : " + JSON.stringify(data); // Si rien de connu, on affiche tout
+            }
             
             chatBox.innerHTML += `<div class="msg ai">${aiReply}</div>`;
         } catch (e) {
-            console.error(e);
-            chatBox.innerHTML += `<div class="msg ai">Erreur de communication avec l'IA.</div>`;
+            console.error("Erreur Fetch:", e);
+            chatBox.innerHTML += `<div class="msg ai">ERREUR DE CONNEXION : Le serveur ne répond pas (vérifie Ngrok).</div>`;
         }
         chatBox.scrollTop = chatBox.scrollHeight;
     }
