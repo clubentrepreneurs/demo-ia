@@ -2,15 +2,16 @@
   <head>
     <title>Démo Chatbot UniCA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: sans-serif; }
+      .header { background: #003576; color: white; padding: 15px; text-align: center; height: 10%; }
+      iframe { border: none; width: 100%; height: 90%; }
+    </style>
   </head>
   <body>
-    <h1>Bienvenue sur le Chatbot UniCA</h1>
-    <p>Le chat est prêt pour la démo.</p>
-
-    <script 
-      data-embed-id="b3808c01-a6fb-4e48-ad7d-b471a934eb86"
-      data-base-api-url="https://frieda-isthmian-darci.ngrok-free.dev/api/embed"
-      src="https://frieda-isthmian-darci.ngrok-free.dev/embed/anythingllm-chat-widget.min.js">
-    </script>
+    <div class="header">
+      <strong>Chatbot UniCA - Session de Démo</strong>
+    </div>
+    <iframe src="https://frieda-isthmian-darci.ngrok-free.dev/e/b3808c01-a6fb-4e48-ad7d-b471a934eb86"></iframe>
   </body>
 </html>
